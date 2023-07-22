@@ -5,7 +5,7 @@ import userModel from "../models/userModel";
 
 // Register new account
 export  const registerUser = async (req, res) => {
-    const saltPassword = await  bcrypt.genSalt(10);
+    const saltPassword = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, saltPassword);
     req.body.password = hashedPassword;
     const newUser = new UserModel(req.body);
@@ -25,8 +25,8 @@ export  const registerUser = async (req, res) => {
                 { expiresIn: "1h" }
             );
             res.status(200).json({ user, token });
-        } catch (err) {
-            res.status(500).json({ message: err.message });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
         }
 };
 
