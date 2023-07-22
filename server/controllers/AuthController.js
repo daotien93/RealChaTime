@@ -6,9 +6,9 @@ import userModel from "../models/userModel";
 // Register new account
 export  const registerUser = async (req, res) => {
     const saltPassword = await  bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.has(req.body.password, saltPassword);
+    const hashedPassword = await bcrypt.hash(req.body.password, saltPassword);
     req.body.password = hashedPassword;
-    const newUser = new userModel(req.body);
+    const newUser = new UserModel(req.body);
     const { username } = req.body;
     try {
         // addition new
