@@ -11,9 +11,7 @@ const postSchema = new mongoose.Schema(
         },
         images: String,
     },
-    {
-        timestams: true,
-    }
+    { timestamps: true }
 );
 
 var PostModel = mongoose.model("Posts", postSchema);

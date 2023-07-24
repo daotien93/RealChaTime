@@ -5,6 +5,13 @@ import mongoose from "mongoose";
 import cors from 'cors';
 
 // Routes
+import AuthRoute from "./routes/AuthRoute";
+import UserRoute from "./routes/UserRoute";
+import PostRoute from "./routes/PostRoute";
+import UploadRoute from "./routes/UploadRoute";
+import ChatRoute from "./routes/ChatRoute";
+import MessageRoute from "./routes/MessageRoute";
+
 const app = express();
 
 // Middleware
@@ -18,8 +25,12 @@ app.use('/images', express.static('images'));
 dotenv.config();
 const PORT_URL =process.env.PORT || 8000;
 
-const CONNECTION =process.env.MONGODB_CONNECTION;
-mongoose
-    .connect(CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => app.listen(PORT_URL, () => console.log(`Listening at Port ${PORT}`)))
-    .catch((error) => console.log(`${error} did not connect`));
+const CONNECTION =process.env.MONGODB_CONNECTION;   
+
+
+app.use('/auth', AuthRoute);
+app.use('/user', UserRoute)
+app.use('/posts', PostRoute)
+app.use('/upload', UploadRoute)
+app.use('/chat', ChatRoute)
+app.use('/message', MessageRoute)
